@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 public class StartForm extends JFrame {
 
-    public static boolean frameState = false;
-
     private JLabel loginLabel = new JLabel("Login:");
     private JTextField loginField = new JTextField("", 5);
 
@@ -28,7 +26,6 @@ public class StartForm extends JFrame {
         this.setResizable(true);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frameState = true;
 
         Container container = this.getContentPane();
         container.setLayout(new GridLayout(4, 2, 2, 2));
@@ -59,10 +56,9 @@ public class StartForm extends JFrame {
             System.setProperty("typeOfGame", chaosRadio.isSelected() ? "chaos" : "dungeon");
             System.setProperty("headless", String.valueOf(browserOnCheck.isSelected()));
 
-            frameState = false;
-
             GameCombatsBot gameCombatsBot = new GameCombatsBot();
             gameCombatsBot.startBE();
+
         }
     }
 
