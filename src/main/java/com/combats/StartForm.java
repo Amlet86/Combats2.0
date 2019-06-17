@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 public class StartForm extends JFrame {
 
     private JLabel loginLabel = new JLabel("Login:");
-    private JTextField loginField = new JTextField("", 5);
+    private JTextField loginField = new JTextField("");
 
     private JLabel passwordLabel = new JLabel("Password:");
-    private JTextField passwordField = new JTextField("", 5);
+    private JTextField passwordField = new JTextField("");
 
     private JRadioButton chaosRadio = new JRadioButton("Chaos");
     private JRadioButton dungeonRadio = new JRadioButton("Dungeon");
@@ -24,7 +24,6 @@ public class StartForm extends JFrame {
         super("CombatsBot");
         this.setBounds(800, 500, 400, 250);
         this.setResizable(true);
-        this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         Container container = this.getContentPane();
@@ -63,7 +62,8 @@ public class StartForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        new StartForm();
+        StartForm startForm = new StartForm();
+        startForm.setVisible(true);
     }
 }
 
