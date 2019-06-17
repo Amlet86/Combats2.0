@@ -24,13 +24,13 @@ public class StartPage extends BasePage {
             $("[src='http://img.combats.ru/i/images/subimages/sun_new_gate.gif']").click();
             waiting(8, 10);
         }
-        if ($("[src='http://img.combats.ru/i/images/subimages/sn_arrow.gif']").isDisplayed()) {
-            $("[src='http://img.combats.ru/i/images/subimages/sn_arrow.gif']").click();
-            waiting(10, 15);
+        if ($$("[src='http://img.combats.ru/i/images/subimages/sn_arrow.gif']").get(1).isDisplayed()) {
+            $$("[src='http://img.combats.ru/i/images/subimages/sn_arrow.gif']").get(1).click();
+            waiting(8, 10);
         }
         if ($("[src='http://img.combats.ru/i/images/subimages/sn_club.gif']").isDisplayed()) {
-            waiting(10, 15);
-            $("[src='http://img.combats.ru/i/images/subimages/sn_club.gif']").click();
+            $$("[src='http://img.combats.ru/i/images/subimages/sn_club.gif']").get(3).click();
+            waiting(5, 7);
         }
         return Selenide.page(GoToBattlePage.class);
     }
