@@ -14,6 +14,9 @@ import static com.combats.BaseCombatsBot.waiting;
 
 public class BattlePage {
 
+    @FindBy(css = "body")
+    private SelenideElement body;
+
     @FindBy(css = "[action=commit]")
     private SelenideElement commitBtn;
 
@@ -49,7 +52,7 @@ public class BattlePage {
         commitBtn.waitUntil(visible, 25000);
         while (commitBtn.isDisplayed() || battleKick.isDisplayed()) {
             if (battleKick.isDisplayed()) {
-                $("body").pressEnter();
+                body.pressEnter();
             }
             if (commitBtn.isDisplayed()) {
                 if ($(".UserBattleMethod").isDisplayed()) {
@@ -64,11 +67,11 @@ public class BattlePage {
                     waiting(1, 2);
                 }
                 if (attackRadios.get(1).isDisplayed())
-                    attackRadios.get(getRandomInt(0, 5)).click();
+                    body.sendKeys(String.valueOf(getRandomInt(0, 5)));
                 if (defendRadios.get(1).isDisplayed())
-                    defendRadios.get(getRandomInt(0, 5)).click();
+                    body.sendKeys(String.valueOf(getRandomInt(0, 5)));
                 if (commitBtn.isDisplayed()) {
-                    $("body").pressEnter();
+                    body.pressEnter();
                 }
             }
             waiting(1, 2);

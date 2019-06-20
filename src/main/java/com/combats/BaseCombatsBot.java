@@ -85,5 +85,14 @@ public class BaseCombatsBot {
         }
     }
 
+    public static void waiting(double fTime) {
+        int iTime = (int) (fTime * 1000);
+        try {
+            sleep(iTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
