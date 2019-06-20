@@ -20,7 +20,7 @@ public class GameCombatsBot extends BaseCombatsBot {
                 walkingDownTheDungeons(pet, telegramAPI);
             else {
                 fightOfChaos(pet, telegramAPI);
-                waiting(180, 240);
+                waiting(220, 240);
             }
         }
         end();
