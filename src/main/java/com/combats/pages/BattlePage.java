@@ -71,10 +71,9 @@ public class BattlePage {
                 if (attackRadios.size() > 6)
                     body.sendKeys(String.valueOf(getRandomInt(1, 6)));
                 if (defendRadios.get(1).isDisplayed())
-                    body.sendKeys(String.valueOf(getRandomInt(1, 6)));
+                    defendRadios.get(getRandomInt(0, 5)).click();
                 if (commitBtn.isDisplayed()) {
                     body.pressEnter();
-                    waiting(0, 1);
                 }
             }
             waiting(1, 2);
