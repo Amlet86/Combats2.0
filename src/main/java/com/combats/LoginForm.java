@@ -5,23 +5,24 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StartForm extends JFrame {
+public class LoginForm extends JFrame {
 
-    private JLabel loginLabel = new JLabel("Login:");
-    private JTextField loginField = new JTextField(15);
+    JLabel loginLabel = new JLabel("Login:");
+    JTextField loginField = new JTextField(20);
 
-    private JLabel passwordLabel = new JLabel("Password:");
-    private JPasswordField passwordField = new JPasswordField(15);
+    JLabel passwordLabel = new JLabel("Password:");
+    JPasswordField passwordField = new JPasswordField(20);
+    JCheckBox save = new JCheckBox("Save");
 
-    private JRadioButton chaosRadio = new JRadioButton("Chaos");
-    private JRadioButton dungeonRadio = new JRadioButton("Dungeon");
+    JRadioButton chaosRadio = new JRadioButton("Chaos");
+    JRadioButton dungeonRadio = new JRadioButton("Dungeon");
 
-    private JCheckBox petCheck = new JCheckBox("Pet");
-    private JCheckBox browserOffCheck = new JCheckBox("Browser off");
+    JCheckBox petCheck = new JCheckBox("Pet");
+    JCheckBox browserOffCheck = new JCheckBox("Browser off");
 
-    private JButton goButton = new JButton("Start");
+    JButton goButton = new JButton("Start");
 
-    public StartForm() {
+    public LoginForm() {
         super("CombatsBot");
         setBounds(800, 500, 400, 250);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,11 +37,12 @@ public class StartForm extends JFrame {
         container2.add(passwordLabel);
         container2.add(Box.createHorizontalStrut(6));
         container2.add(passwordField);
+        container2.add(save);
 
         Box container3 = Box.createHorizontalBox();
-        ButtonGroup group = new ButtonGroup();
-        group.add(chaosRadio);
-        group.add(dungeonRadio);
+        ButtonGroup bGroup = new ButtonGroup();
+        bGroup.add(chaosRadio);
+        bGroup.add(dungeonRadio);
         container3.add(chaosRadio);
         chaosRadio.setSelected(true);
         container3.add(Box.createHorizontalStrut(20));
@@ -91,9 +93,5 @@ public class StartForm extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        StartForm startForm = new StartForm();
-        startForm.setVisible(true);
-    }
 }
 

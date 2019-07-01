@@ -26,7 +26,7 @@
               <transformers>
                 <transformer>
                   <manifestEntries>
-                    <Main-Class>com.combats.StartForm</Main-Class>
+                    <Main-Class>com.combats.LoginForm</Main-Class>
                     <X-Compile-Source-JDK>${maven.compile.source}</X-Compile-Source-JDK>
                     <X-Compile-Target-JDK>${maven.compile.target}</X-Compile-Target-JDK>
                   </manifestEntries>
