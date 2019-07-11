@@ -37,7 +37,7 @@ public class LoginForm extends JFrame {
         container2.add(passwordLabel);
         container2.add(Box.createHorizontalStrut(6));
         container2.add(passwordField);
-        container2.add(save);
+//        container2.add(save);
 
         Box container3 = Box.createHorizontalBox();
         ButtonGroup bGroup = new ButtonGroup();
