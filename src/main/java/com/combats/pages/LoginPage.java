@@ -2,7 +2,7 @@ package com.combats.pages;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     public LoginPage enterToMainPage() {
         return open("http://www.combats.com/", LoginPage.class);

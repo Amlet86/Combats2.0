@@ -8,10 +8,13 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.combats.BaseCombatsBot.waiting;
 import static java.lang.Double.parseDouble;
 
-public class GoToBattlePage {
+public class GoToBattlePage extends BasePage {
 
     @FindBy(css = "[value='Поединки']")
     private SelenideElement battles;
+
+    @FindBy(xpath = "//*[.='Хаотичные']")
+    private SelenideElement chaosBattle;
 
     @FindBy(css = "[value='Обновить']")
     private SelenideElement refreshBtn;
@@ -30,25 +33,26 @@ public class GoToBattlePage {
     public BattlePage enterToChaos() {
         if (battles.isDisplayed())
             battles.click();
-                $x("//*[.='Хаотичные']").click();
-
-        while (refreshBtn.isDisplayed()) {
-            if (confirm.isDisplayed()) {
-                int number = chooseRadioWithMinTime();
-                if (number >= 0) {
-                    $$(goCombat).get(number).click();
-                    confirm.click();
+        if(chaosBattle.isDisplayed()) {
+            chaosBattle.click();
+            while (refreshBtn.isDisplayed()) {
+                if (confirm.isDisplayed()) {
+                    int number = chooseRadioWithMinTime();
+                    if (number >= 0) {
+                        $$(goCombat).get(number).click();
+                        confirm.click();
+                    }
                 }
+                if (applicationChaos.isDisplayed()) {
+                    applicationChaos.click();
+                    $("[name=startime2]").selectOptionByValue("300");
+                    $("[name=levellogin1]").selectOptionByValue("3");
+                    open.click();
+                }
+                if (refreshBtn.isDisplayed())
+                    refreshBtn.click();
+                waiting(10, 15);
             }
-            if (applicationChaos.isDisplayed()) {
-                applicationChaos.click();
-                $("[name=startime2]").selectOptionByValue("300");
-                $("[name=levellogin1]").selectOptionByValue("3");
-                open.click();
-            }
-            if (refreshBtn.isDisplayed())
-                refreshBtn.click();
-            waiting(10, 15);
         }
         return page(BattlePage.class);
     }

@@ -2,6 +2,11 @@ package com.combats;
 
 import static java.lang.Boolean.parseBoolean;
 
+/*
+* This class set System properties for configure game
+* and
+* contains game logic top level
+ */
 public class GameCombatsBot extends BaseCombatsBot {
 
     public void startBE() {

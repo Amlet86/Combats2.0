@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.combats.BaseCombatsBot.waiting;
 
-public class DungeonsPage {
+public class DungeonsPage extends BasePage {
 
     @FindBy(css = "div#room")
     private SelenideElement map;

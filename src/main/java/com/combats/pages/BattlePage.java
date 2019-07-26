@@ -12,10 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.combats.BaseCombatsBot.getRandomInt;
 import static com.combats.BaseCombatsBot.waiting;
 
-public class BattlePage {
-
-    @FindBy(css = "body")
-    private SelenideElement body;
+public class BattlePage extends BasePage {
 
     @FindBy(css = "[action=commit]")
     private SelenideElement commitBtn;

@@ -14,16 +14,6 @@ import static java.lang.Thread.sleep;
 
 public class BaseCombatsBot {
 
-    /*
-     * command for launch not compiled from console:
-     * mvn exec:java -Dexec.mainClass="com.combats.GameCombatsBot" -Dlogin=login -Dpassword=password
-     * -DtelegramAPI=telegramAPI -Dpet=yes/no -Dheadless=true/false
-     *
-     * command for launch Combats.jar from console:
-     * java -Dlogin=login -Dpassword=password -Dpet=yes/no -Dheadless=true/false -jar Combats-version.jar
-     *
-     */
-
     static int getCurrentTime(){
         SimpleDateFormat parser = new SimpleDateFormat("HH");
         return Integer.parseInt(parser.format(new Date()));

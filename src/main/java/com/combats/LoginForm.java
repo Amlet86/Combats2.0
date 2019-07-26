@@ -4,7 +4,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/*
+* This class create UI form for login in game
+ */
 public class LoginForm extends JFrame {
 
     JLabel loginLabel = new JLabel("Login:");
@@ -12,7 +14,6 @@ public class LoginForm extends JFrame {
 
     JLabel passwordLabel = new JLabel("Password:");
     JPasswordField passwordField = new JPasswordField(20);
-    JCheckBox save = new JCheckBox("Save");
 
     JRadioButton chaosRadio = new JRadioButton("Chaos");
     JRadioButton dungeonRadio = new JRadioButton("Dungeon");
@@ -37,7 +38,6 @@ public class LoginForm extends JFrame {
         container2.add(passwordLabel);
         container2.add(Box.createHorizontalStrut(6));
         container2.add(passwordField);
-//        container2.add(save);
 
         Box container3 = Box.createHorizontalBox();
         ButtonGroup bGroup = new ButtonGroup();
@@ -73,6 +73,11 @@ public class LoginForm extends JFrame {
         mainBox.add(container5);
         setContentPane(mainBox);
         pack();
+
+        /*
+        * goButton listens press Enter key
+         */
+        this.getRootPane().setDefaultButton(goButton);
 
         goButton.addActionListener(new ButtonEventListener());
         goButton.addActionListener(e -> this.dispose());
