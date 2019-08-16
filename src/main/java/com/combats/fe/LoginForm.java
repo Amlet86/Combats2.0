@@ -1,27 +1,32 @@
-package com.combats;
+package com.combats.fe;
+
+import com.combats.be.TopLevelLogic;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*
-* This class create UI form for login in game
+
+import static com.combats.Properties.*;
+
+/**
+ * Create UI form for input variables and login in the game
  */
 public class LoginForm extends JFrame {
 
-    JLabel loginLabel = new JLabel("Login:");
-    JTextField loginField = new JTextField(20);
+    private JLabel loginLabel = new JLabel("Login:");
+    private JTextField loginField = new JTextField(20);
 
-    JLabel passwordLabel = new JLabel("Password:");
-    JPasswordField passwordField = new JPasswordField(20);
+    private JLabel passwordLabel = new JLabel("Password:");
+    private JPasswordField passwordField = new JPasswordField(20);
 
-    JRadioButton chaosRadio = new JRadioButton("Chaos");
-    JRadioButton dungeonRadio = new JRadioButton("Dungeon");
+    private JRadioButton chaosRadio = new JRadioButton("Chaos");
+    private JRadioButton dungeonRadio = new JRadioButton("Dungeon");
 
-    JCheckBox petCheck = new JCheckBox("Pet");
-    JCheckBox browserOffCheck = new JCheckBox("Browser off");
+    private JCheckBox petCheck = new JCheckBox("Pet");
+    private JCheckBox browserOffCheck = new JCheckBox("Browser off");
 
-    JButton goButton = new JButton("Start");
+    private JButton startButton = new JButton("Start");
 
     public LoginForm() {
         super("CombatsBot");
@@ -56,7 +61,7 @@ public class LoginForm extends JFrame {
 
         Box container5 = Box.createHorizontalBox();
         container5.add(Box.createHorizontalGlue());
-        container5.add(goButton);
+        container5.add(startButton);
 
         loginLabel.setPreferredSize(passwordLabel.getPreferredSize());
 
@@ -74,27 +79,26 @@ public class LoginForm extends JFrame {
         setContentPane(mainBox);
         pack();
 
-        /*
-        * goButton listens press Enter key
-         */
-        this.getRootPane().setDefaultButton(goButton);
+        this.getRootPane().setDefaultButton(startButton);
 
-        goButton.addActionListener(new ButtonEventListener());
-        goButton.addActionListener(e -> this.dispose());
+        startButton.addActionListener(new ButtonEventListener());
+        startButton.addActionListener(e -> this.dispose());
     }
 
     class ButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.setProperty("login", loginField.getText());
-            System.setProperty("password", String.valueOf(passwordField.getPassword()));
+            setUserLogin(loginField.getText());
+            setUserPassword(String.valueOf(passwordField.getPassword()));
 
-            System.setProperty("typeOfGame", chaosRadio.isSelected() ? "chaos" : "dungeon");
+            setTypeOfGame(chaosRadio.isSelected());
 
-            System.setProperty("pet", chaosRadio.isSelected() ? "yes" : "no");
-            System.setProperty("headless", String.valueOf(browserOffCheck.isSelected()));
+            setPet(chaosRadio.isSelected());
 
-            GameCombatsBot gameCombatsBot = new GameCombatsBot();
-            gameCombatsBot.startBE();
+            setHeadless(browserOffCheck.isSelected());
+
+            TopLevelLogic topLevelLogic = new TopLevelLogic();
+            topLevelLogic.startBrowser();
+            topLevelLogic.startGame();
         }
     }
 

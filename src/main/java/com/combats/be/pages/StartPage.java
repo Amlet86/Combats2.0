@@ -1,9 +1,9 @@
-package com.combats.pages;
+package com.combats.be.pages;
 
 import com.codeborne.selenide.Selenide;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.combats.BaseCombatsBot.waiting;
+import static com.combats.be.Utils.waiting;
 
 public class StartPage extends BasePage {
 

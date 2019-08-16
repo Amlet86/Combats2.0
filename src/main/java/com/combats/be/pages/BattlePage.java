@@ -1,4 +1,4 @@
-package com.combats.pages;
+package com.combats.be.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.mashape.unirest.http.Unirest;
@@ -9,8 +9,10 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.combats.BaseCombatsBot.getRandomInt;
-import static com.combats.BaseCombatsBot.waiting;
+import static com.combats.Properties.getPet;
+import static com.combats.Properties.getTelegramAPI;
+import static com.combats.be.Utils.getRandomInt;
+import static com.combats.be.Utils.waiting;
 
 public class BattlePage extends BasePage {
 
@@ -44,7 +46,7 @@ public class BattlePage extends BasePage {
     public BattlePage() {
     }
 
-    public void fight(String pet, String telegramAPI) {
+    public void fight() {
         switchTo().defaultContent();
         commitBtn.waitUntil(visible, 25000);
         while (commitBtn.isDisplayed() || battleKick.isDisplayed()) {
@@ -53,7 +55,7 @@ public class BattlePage extends BasePage {
             }
             if (commitBtn.isDisplayed()) {
                 if ($(".UserBattleMethod").isDisplayed()) {
-                    if (pet.equals("yes"))
+                    if (getPet())
                         activeBattleMethods.get(0).click();
                     else {
                         if (anyBattleMethods.size() != 12)
@@ -75,7 +77,7 @@ public class BattlePage extends BasePage {
             }
             waiting(1, 2);
         }
-        getMessage(telegramAPI);
+        getMessage(getTelegramAPI());
         exitBattle();
     }
 

@@ -3,16 +3,16 @@
 The game is here: http://www.combats.com/, it is RPG on-line game.
 
 command for launch not compiled from console: <br/>
-     * mvn exec:java -Dexec.mainClass="com.combats.GameCombatsBot" ...parameters...
+     * mvn exec:java -Dexec.mainClass="com.combats.Start" ...parameters...
      
 command for launch Combats.jar from console: <br/>
-     * java ...parameters... -jar Combats-version.jar
+     * java -jar Combats-version.jar
      
 Parameters:  
- -Dlogin=login  
- -Dpassword=password  
+ - login  
+ - password  
  <--optional-->  
- -DtypeOfGame=chaos/dungeon  
- -Dpet=yes/no  
- -Dheadless=true/false  
- -DtelegramAPI=telegramAPI  
+ - typeOfGame = true(chaos)/false(dungeon)  
+ - pet = true/false  
+ - headless = true/false  
+ - telegramAPI  
