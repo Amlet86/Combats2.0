@@ -1,11 +1,11 @@
-package com.combats.be.pages;
+package com.combats.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
-import static com.combats.be.Utils.waiting;
+import static com.combats.Utils.waiting;
 
 public class DungeonsPage extends BasePage {
 

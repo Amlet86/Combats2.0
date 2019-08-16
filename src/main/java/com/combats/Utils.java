@@ -1,4 +1,4 @@
-package com.combats.be;
+package com.combats;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +8,7 @@ import static java.lang.Thread.sleep;
 
 public class Utils {
 
-    static int getCurrentTime(){
+    public static int getCurrentTime(){
         SimpleDateFormat parser = new SimpleDateFormat("HH");
         return Integer.parseInt(parser.format(new Date()));
     }

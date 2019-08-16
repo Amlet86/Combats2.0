@@ -1,15 +1,18 @@
 package com.combats.be;
 
 import com.codeborne.selenide.WebDriverRunner;
-import com.combats.be.pages.LoginPage;
-import com.combats.be.pages.StartPage;
+import com.combats.pages.LoginPage;
+import com.combats.pages.StartPage;
+
+import static com.combats.Properties.getUserLogin;
+import static com.combats.Properties.getUserPassword;
 
 class BaseLevelLogic {
 
-    static void loginInGame(String login, String password) {
+    static void loginInGame() {
         LoginPage loginPage = new LoginPage();
         loginPage.enterToMainPage()
-                .login(login, password);
+                .login(getUserLogin(), getUserPassword());
     }
 
     static void fightOfChaos() {
@@ -26,7 +29,7 @@ class BaseLevelLogic {
                 .fight();
     }
 
-    static void end() {
+    static void quitWebDriver() {
         WebDriverRunner.getWebDriver().quit();
     }
 

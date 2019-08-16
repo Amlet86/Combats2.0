@@ -1,11 +1,11 @@
-package com.combats.be.pages;
+package com.combats.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.combats.be.Utils.waiting;
+import static com.combats.Utils.waiting;
 import static java.lang.Double.parseDouble;
 
 public class GoToBattlePage extends BasePage {

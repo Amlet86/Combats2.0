@@ -91,14 +91,11 @@ public class LoginForm extends JFrame {
             setUserPassword(String.valueOf(passwordField.getPassword()));
 
             setTypeOfGame(chaosRadio.isSelected());
-
             setPet(chaosRadio.isSelected());
-
             setHeadless(browserOffCheck.isSelected());
 
             TopLevelLogic topLevelLogic = new TopLevelLogic();
-            topLevelLogic.startBrowser();
-            topLevelLogic.startGame();
+            topLevelLogic.game();
         }
     }
 

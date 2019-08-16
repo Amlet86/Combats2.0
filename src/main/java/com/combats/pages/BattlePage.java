@@ -1,4 +1,4 @@
-package com.combats.be.pages;
+package com.combats.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.mashape.unirest.http.Unirest;
@@ -11,8 +11,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.combats.Properties.getPet;
 import static com.combats.Properties.getTelegramAPI;
-import static com.combats.be.Utils.getRandomInt;
-import static com.combats.be.Utils.waiting;
+import static com.combats.Utils.getRandomInt;
+import static com.combats.Utils.waiting;
 
 public class BattlePage extends BasePage {
 
