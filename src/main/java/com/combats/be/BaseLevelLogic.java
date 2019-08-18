@@ -30,7 +30,8 @@ class BaseLevelLogic {
     }
 
     static void quitWebDriver() {
-        WebDriverRunner.getWebDriver().quit();
+        if (WebDriverRunner.hasWebDriverStarted())
+            WebDriverRunner.getWebDriver().quit();
     }
 
 }

@@ -31,10 +31,13 @@ public class GoToBattlePage extends BasePage {
     private By goCombat = By.cssSelector("[name=gocombat]");
 
     public BattlePage enterToChaos() {
-        if (battles.isDisplayed())
+        if (battles.isDisplayed()) {
             battles.click();
+            waiting(1, 2);
+        }
         if(chaosBattle.isDisplayed()) {
             chaosBattle.click();
+            waiting(1, 2);
             while (refreshBtn.isDisplayed()) {
                 if (confirm.isDisplayed()) {
                     int number = chooseRadioWithMinTime();

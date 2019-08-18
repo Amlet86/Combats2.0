@@ -1,16 +1,18 @@
 package com.combats;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import static com.combats.Properties.getEndTimeOfTheGame;
 import static java.lang.Thread.sleep;
 
 public class Utils {
 
-    public static int getCurrentTime(){
-        SimpleDateFormat parser = new SimpleDateFormat("HH");
-        return Integer.parseInt(parser.format(new Date()));
+    public static boolean hasGameTime() {
+        if(getEndTimeOfTheGame().getHours() != 0 && getEndTimeOfTheGame().getMinutes() != 0)
+            return new Date().before(getEndTimeOfTheGame());
+        else
+            return true;
     }
 
     private static int getRandomMultiplyThousand(int from, int to) {
@@ -36,6 +38,18 @@ public class Utils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String[] getListHours() {
+        String[] listHours = new String[24];
+        for (int i = 0; i < 24; i++) {
+            listHours[i] = String.valueOf(i);
+        }
+        return listHours;
+    }
+
+    public static String[] getListMinutes() {
+        return new String[]{"00", "10", "20", "30", "40", "50"};
     }
 
 }

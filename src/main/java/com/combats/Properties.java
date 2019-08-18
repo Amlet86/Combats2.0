@@ -1,5 +1,7 @@
 package com.combats;
 
+import java.util.Date;
+
 public class Properties {
 
     private static boolean headless;
@@ -7,7 +9,7 @@ public class Properties {
     private static String userPassword;
     private static boolean typeOfGame;
     private static boolean pet;
-    private static int timeEndGame;
+    private static Date endTimeOfTheGame = new Date();
     private static String telegramAPI;
 
     public static boolean isHeadless() {
@@ -50,12 +52,13 @@ public class Properties {
         Properties.pet = pet;
     }
 
-    public static int getTimeEndGame() {
-        return timeEndGame;
+    public static Date getEndTimeOfTheGame() {
+        return endTimeOfTheGame;
     }
 
-    public static void setTimeEndGame(int timeEndGame) {
-        Properties.timeEndGame = timeEndGame;
+    public static void setEndTimeOfTheGame(Object hours, Object minutes) {
+        endTimeOfTheGame.setHours(Integer.parseInt(hours.toString()));
+        endTimeOfTheGame.setMinutes(Integer.parseInt(minutes.toString()));
     }
 
     public static String getTelegramAPI() {

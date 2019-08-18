@@ -8,25 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.combats.Properties.*;
+import static com.combats.Utils.getListHours;
+import static com.combats.Utils.getListMinutes;
 
 /**
  * Create UI form for input variables and login in the game
  */
 public class LoginForm extends JFrame {
 
-    private JLabel loginLabel = new JLabel("Login:");
     private JTextField loginField = new JTextField(20);
-
-    private JLabel passwordLabel = new JLabel("Password:");
     private JPasswordField passwordField = new JPasswordField(20);
 
     private JRadioButton chaosRadio = new JRadioButton("Chaos");
-    private JRadioButton dungeonRadio = new JRadioButton("Dungeon");
 
     private JCheckBox petCheck = new JCheckBox("Pet");
     private JCheckBox browserOffCheck = new JCheckBox("Browser off");
 
-    private JButton startButton = new JButton("Start");
+    private JComboBox endTimeHours = new JComboBox(getListHours());
+    private JComboBox endTimeMinutes = new JComboBox(getListMinutes());
 
     public LoginForm() {
         super("CombatsBot");
@@ -34,48 +33,65 @@ public class LoginForm extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
-        Box container1 = Box.createHorizontalBox();
-        container1.add(loginLabel);
-        container1.add(Box.createHorizontalStrut(6));
-        container1.add(loginField);
+        Box loginBox = Box.createHorizontalBox();
+        JLabel loginLabel = new JLabel("Login:");
+        loginBox.add(loginLabel);
+        loginBox.add(Box.createHorizontalStrut(6));
+        loginBox.add(loginField);
 
-        Box container2 = Box.createHorizontalBox();
-        container2.add(passwordLabel);
-        container2.add(Box.createHorizontalStrut(6));
-        container2.add(passwordField);
+        Box passwordBox = Box.createHorizontalBox();
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordBox.add(passwordLabel);
+        passwordBox.add(Box.createHorizontalStrut(6));
+        passwordBox.add(passwordField);
 
-        Box container3 = Box.createHorizontalBox();
+        Box typeOfBattleBox = Box.createHorizontalBox();
         ButtonGroup bGroup = new ButtonGroup();
         bGroup.add(chaosRadio);
+        JRadioButton dungeonRadio = new JRadioButton("Dungeon");
         bGroup.add(dungeonRadio);
-        container3.add(chaosRadio);
+        typeOfBattleBox.add(chaosRadio);
         chaosRadio.setSelected(true);
-        container3.add(Box.createHorizontalStrut(20));
-        container3.add(dungeonRadio);
+        typeOfBattleBox.add(Box.createHorizontalStrut(20));
+        typeOfBattleBox.add(dungeonRadio);
 
-        Box container4 = Box.createHorizontalBox();
-        container4.add(petCheck);
-        container4.add(Box.createHorizontalStrut(23));
-        container4.add(browserOffCheck);
+        Box petAndBrowserBox = Box.createHorizontalBox();
+        petAndBrowserBox.add(petCheck);
+        petAndBrowserBox.add(Box.createHorizontalStrut(23));
+        petAndBrowserBox.add(browserOffCheck);
         browserOffCheck.setSelected(true);
 
-        Box container5 = Box.createHorizontalBox();
-        container5.add(Box.createHorizontalGlue());
-        container5.add(startButton);
+        Box endTimeOfTheGameBox = Box.createHorizontalBox();
+        endTimeOfTheGameBox.add(Box.createHorizontalStrut(25));
+        endTimeOfTheGameBox.add(new JLabel("End time:"));
+        endTimeOfTheGameBox.add(Box.createHorizontalStrut(5));
+        endTimeOfTheGameBox.add(endTimeHours);
+        endTimeOfTheGameBox.add(new JLabel("hours"));
+        endTimeOfTheGameBox.add(Box.createHorizontalStrut(5));
+        endTimeOfTheGameBox.add(endTimeMinutes);
+        endTimeOfTheGameBox.add(new JLabel("minutes"));
+        endTimeOfTheGameBox.add(Box.createHorizontalStrut(25));
+
+        Box startButtonBox = Box.createHorizontalBox();
+        startButtonBox.add(Box.createHorizontalGlue());
+        JButton startButton = new JButton("Start");
+        startButtonBox.add(startButton);
 
         loginLabel.setPreferredSize(passwordLabel.getPreferredSize());
 
         Box mainBox = Box.createVerticalBox();
         mainBox.setBorder(new EmptyBorder(12, 12, 12, 12));
-        mainBox.add(container1);
+        mainBox.add(loginBox);
         mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(container2);
+        mainBox.add(passwordBox);
         mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(container3);
+        mainBox.add(typeOfBattleBox);
         mainBox.add(Box.createVerticalStrut(5));
-        mainBox.add(container4);
-        mainBox.add(Box.createVerticalStrut(8));
-        mainBox.add(container5);
+        mainBox.add(petAndBrowserBox);
+        mainBox.add(Box.createVerticalStrut(10));
+        mainBox.add(endTimeOfTheGameBox);
+        mainBox.add(Box.createVerticalStrut(10));
+        mainBox.add(startButtonBox);
         setContentPane(mainBox);
         pack();
 
@@ -86,13 +102,16 @@ public class LoginForm extends JFrame {
     }
 
     class ButtonEventListener implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             setUserLogin(loginField.getText());
             setUserPassword(String.valueOf(passwordField.getPassword()));
 
             setTypeOfGame(chaosRadio.isSelected());
-            setPet(chaosRadio.isSelected());
+            setPet(petCheck.isSelected());
             setHeadless(browserOffCheck.isSelected());
+
+            setEndTimeOfTheGame(endTimeHours.getSelectedItem(), endTimeMinutes.getSelectedItem());
 
             TopLevelLogic topLevelLogic = new TopLevelLogic();
             topLevelLogic.game();
