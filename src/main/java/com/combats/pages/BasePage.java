@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
+import static com.combats.Utils.waiting;
 
 class BasePage {
 
@@ -13,6 +14,7 @@ class BasePage {
 
     void switchToGameFrame() {
         switchTo().frame($("[onload='top.User.Framework.MainOnLoad( )']"));
+        waiting(1, 2);
     }
 
 }

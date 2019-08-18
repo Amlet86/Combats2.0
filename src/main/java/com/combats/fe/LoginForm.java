@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 import static com.combats.Properties.*;
 import static com.combats.Utils.getListHours;
@@ -111,7 +112,7 @@ public class LoginForm extends JFrame {
             setPet(petCheck.isSelected());
             setHeadless(browserOffCheck.isSelected());
 
-            setEndTimeOfTheGame(endTimeHours.getSelectedItem(), endTimeMinutes.getSelectedItem());
+            setEndTimeOfTheGame(Objects.requireNonNull(endTimeHours.getSelectedItem()), Objects.requireNonNull(endTimeMinutes.getSelectedItem()));
 
             TopLevelLogic topLevelLogic = new TopLevelLogic();
             topLevelLogic.game();

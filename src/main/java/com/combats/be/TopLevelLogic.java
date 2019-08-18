@@ -3,7 +3,6 @@ package com.combats.be;
 import static com.combats.Properties.getTypeOfGame;
 import static com.combats.Properties.isHeadless;
 import static com.combats.Utils.hasGameTime;
-import static com.combats.Utils.waiting;
 
 /**
  * Set System properties for configure game
@@ -11,9 +10,9 @@ import static com.combats.Utils.waiting;
 public class TopLevelLogic extends BaseLevelLogic {
 
     public void game() {
+        startBrowser();
+        login();
         while (hasGameTime()) {
-            startBrowser();
-            login();
             battles();
         }
         endBrowser();
@@ -28,10 +27,9 @@ public class TopLevelLogic extends BaseLevelLogic {
     }
 
     private void battles() {
-        if (getTypeOfGame()) {
+        if (getTypeOfGame())
             fightOfChaos();
-            waiting(220, 240);
-        } else
+        else
             walkingDownTheDungeons();
     }
 

@@ -44,6 +44,7 @@ public class GoToBattlePage extends BasePage {
                     if (number >= 0) {
                         $$(goCombat).get(number).click();
                         confirm.click();
+                        waiting(1, 2);
                     }
                 }
                 if (applicationChaos.isDisplayed()) {

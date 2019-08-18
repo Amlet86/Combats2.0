@@ -6,6 +6,7 @@ import com.combats.pages.StartPage;
 
 import static com.combats.Properties.getUserLogin;
 import static com.combats.Properties.getUserPassword;
+import static com.combats.Utils.waiting;
 
 class BaseLevelLogic {
 
@@ -20,6 +21,7 @@ class BaseLevelLogic {
         startPage.moveInTheCity()
                 .enterToChaos()
                 .fight();
+        waiting(300, 310);
     }
 
     static void walkingDownTheDungeons() {

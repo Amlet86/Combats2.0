@@ -25,6 +25,9 @@ public class BattlePage extends BasePage {
     @FindBy(css = "[action=gameover]")
     private SelenideElement gameover;
 
+    @FindBy(css = "button.userbattlekick")
+    private SelenideElement battleKick2;
+
     @FindBy(css = "button.UserBattleEnd")
     private SelenideElement battleEnd;
 
@@ -77,17 +80,17 @@ public class BattlePage extends BasePage {
             }
             waiting(1, 2);
         }
-        getMessage(getTelegramAPI());
+        getMessage();
         exitBattle();
     }
 
-    private void getMessage(String telegramAPI) {
+    private void getMessage() {
         if (text.isDisplayed()) {
             String message = text.getText();
-            if (telegramAPI.equals("null"))
+            if (getTelegramAPI() == null)
                 System.out.println(LocalTime.now() + " " + message);
             else
-                Unirest.get("https://api.telegram.org/" + telegramAPI +
+                Unirest.get("https://api.telegram.org/" + getTelegramAPI() +
                         "/sendMessage?chat_id=391800117&text=" + LocalTime.now() + " " + message);
         }
     }

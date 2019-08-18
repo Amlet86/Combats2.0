@@ -19,8 +19,8 @@ public class StartPage extends BasePage {
         switchToGameFrame();
         if ($("#dailypopup").isDisplayed())
             $x("//*[.='Взять задание']").click();
-        waiting(12, 14);
         if ($("[src='http://img.combats.ru/i/images/subimages/sun_109_npc.gif']").isDisplayed()) {
+            waiting(12, 14);
             $("[src='http://img.combats.ru/i/images/subimages/sun_new_gate.gif']").click();
             waiting(8, 10);
         }
