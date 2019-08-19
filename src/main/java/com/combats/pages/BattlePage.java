@@ -25,8 +25,8 @@ public class BattlePage extends BasePage {
     @FindBy(css = "[action=gameover]")
     private SelenideElement gameover;
 
-    @FindBy(css = "button.userbattlekick")
-    private SelenideElement battleKick2;
+    @FindBy(css = ".userbattlekick title='Выйти'")
+    private SelenideElement buttonExit;
 
     @FindBy(css = "button.UserBattleEnd")
     private SelenideElement battleEnd;
