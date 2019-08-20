@@ -9,10 +9,9 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.combats.Properties.getPet;
-import static com.combats.Properties.getTelegramAPI;
-import static com.combats.Utils.getRandomInt;
-import static com.combats.Utils.waiting;
+import static com.combats.utils.Properties.getPet;
+import static com.combats.utils.Properties.getTelegramAPI;
+import static com.combats.utils.Utils.*;
 
 public class BattlePage extends BasePage {
 
@@ -66,7 +65,7 @@ public class BattlePage extends BasePage {
                         else if (!activeBattleMethods.get(0).equals(anyBattleMethods.get(11)))
                             activeBattleMethods.get(0).click();
                     }
-                    waiting(1, 2);
+                    waitAboutSomeSeconds(2);
                 }
                 if (attackRadios.get(1).isDisplayed())
                     body.sendKeys(String.valueOf(getRandomInt(1, 6)));
@@ -78,7 +77,7 @@ public class BattlePage extends BasePage {
                     body.pressEnter();
                 }
             }
-            waiting(1, 2);
+            waitAboutSomeSeconds(2);
         }
         getMessage();
         exitBattle();

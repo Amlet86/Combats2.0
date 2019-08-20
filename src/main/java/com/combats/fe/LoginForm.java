@@ -1,6 +1,7 @@
 package com.combats.fe;
 
 import com.combats.be.TopLevelLogic;
+import com.combats.utils.FileWorker;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,17 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-import static com.combats.Properties.*;
-import static com.combats.Utils.getListHours;
-import static com.combats.Utils.getListMinutes;
+import static com.combats.utils.Properties.*;
+import static com.combats.utils.Utils.getListHours;
+import static com.combats.utils.Utils.getListMinutes;
 
 /**
  * Create UI form for input variables and login in the game
  */
 public class LoginForm extends JFrame {
 
-    private JTextField loginField = new JTextField(20);
-    private JPasswordField passwordField = new JPasswordField(20);
+    private String[] loginAndPassword = FileWorker.readFile();
+    private JTextField loginField = new JTextField(loginAndPassword[0],20);
+    private JPasswordField passwordField = new JPasswordField(loginAndPassword[1],20);
 
     private JRadioButton chaosRadio = new JRadioButton("Chaos");
 

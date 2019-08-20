@@ -1,8 +1,8 @@
 package com.combats.be;
 
-import static com.combats.Properties.getTypeOfGame;
-import static com.combats.Properties.isHeadless;
-import static com.combats.Utils.hasGameTime;
+import static com.combats.utils.Properties.getTypeOfGame;
+import static com.combats.utils.Properties.isHeadless;
+import static com.combats.utils.Utils.hasGameTime;
 
 /**
  * Set System properties for configure game
@@ -11,7 +11,8 @@ public class TopLevelLogic extends BaseLevelLogic {
 
     public void game() {
         startBrowser();
-        login();
+        loginInGame();
+        checkSuccessLoginAndWriteUserData();
         while (hasGameTime()) {
             battles();
         }
@@ -22,15 +23,11 @@ public class TopLevelLogic extends BaseLevelLogic {
         new ConfigBrowser(isHeadless());
     }
 
-    private void login() {
-        loginInGame();
-    }
-
     private void battles() {
         if (getTypeOfGame())
             fightOfChaos();
         else
-            walkingDownTheDungeons();
+            fightOfDungeons();
     }
 
     private void endBrowser() {

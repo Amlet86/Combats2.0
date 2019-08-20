@@ -5,8 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.combats.Utils.waiting;
-import static java.lang.Double.parseDouble;
+import static com.combats.utils.Utils.*;
 
 public class GoToBattlePage extends BasePage {
 
@@ -31,20 +30,15 @@ public class GoToBattlePage extends BasePage {
     private By goCombat = By.cssSelector("[name=gocombat]");
 
     public BattlePage enterToChaos() {
-        if (battles.isDisplayed()) {
-            battles.click();
-            waiting(1, 2);
-        }
+        humanClick(battles);
         if(chaosBattle.isDisplayed()) {
-            chaosBattle.click();
-            waiting(1, 2);
+            humanClick(chaosBattle);
             while (refreshBtn.isDisplayed()) {
                 if (confirm.isDisplayed()) {
                     int number = chooseRadioWithMinTime();
                     if (number >= 0) {
                         $$(goCombat).get(number).click();
-                        confirm.click();
-                        waiting(1, 2);
+                        humanClick(confirm);
                     }
                 }
                 if (applicationChaos.isDisplayed()) {
@@ -55,30 +49,10 @@ public class GoToBattlePage extends BasePage {
                 }
                 if (refreshBtn.isDisplayed())
                     refreshBtn.click();
-                waiting(10, 15);
+                waitAboutSomeSeconds(10);
             }
         }
         return page(BattlePage.class);
-    }
-
-    private int chooseRadioWithMinTime() {
-        int minTime = -1;
-        int iterator = 0;
-        double tmpTime = 5;
-        try {
-            for (SelenideElement element : $$("[action='zayavka.pl'] > .dsc > i > b")) {
-                double time = parseDouble(element.getText());
-                if (time <= tmpTime) {
-                    tmpTime = time;
-                    minTime = iterator;
-                }
-                iterator++;
-            }
-            return minTime;
-        } catch (NumberFormatException e) {
-            e.getStackTrace();
-            return -1;
-        }
     }
 
 }

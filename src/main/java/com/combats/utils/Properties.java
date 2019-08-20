@@ -1,4 +1,4 @@
-package com.combats;
+package com.combats.utils;
 
 import java.util.Date;
 

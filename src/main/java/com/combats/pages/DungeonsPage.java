@@ -3,24 +3,20 @@ package com.combats.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
-import static com.combats.Utils.waiting;
 
 public class DungeonsPage extends BasePage {
 
     @FindBy(css = "div#room")
     private SelenideElement map;
 
-    public BattlePage testInTheDungeon() {
+    public BattlePage inTheDungeon() {
         while (map.isDisplayed()) {
-            $("body").sendKeys("f");
-            waiting(1, 2);
-            $("body").sendKeys("z");
-            waiting(1, 2);
-            $("body").sendKeys("w");
-            waiting(2, 3);
+            humanMoveOnTheMap("f");
+            humanMoveOnTheMap("z");
+            humanMoveOnTheMap("w");
         }
         return page(BattlePage.class);
     }
+
 }

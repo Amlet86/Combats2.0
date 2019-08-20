@@ -5,7 +5,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class LoginPage extends BasePage {
 
     public LoginPage enterToMainPage() {
-        return open("http://www.combats.com/", LoginPage.class);
+        return open(BASE_URL, LoginPage.class);
     }
 
     public StartPage login(String login, String password) {

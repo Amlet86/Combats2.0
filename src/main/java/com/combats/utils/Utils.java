@@ -1,9 +1,13 @@
-package com.combats;
+package com.combats.utils;
+
+import com.codeborne.selenide.SelenideElement;
 
 import java.util.Date;
 import java.util.Random;
 
-import static com.combats.Properties.getEndTimeOfTheGame;
+import static com.codeborne.selenide.Selenide.$$;
+import static com.combats.utils.Properties.getEndTimeOfTheGame;
+import static java.lang.Double.parseDouble;
 import static java.lang.Thread.sleep;
 
 public class Utils {
@@ -15,8 +19,39 @@ public class Utils {
             return true;
     }
 
+    public static int chooseRadioWithMinTime() {
+        int minTime = -1;
+        int iterator = 0;
+        double tmpTime = 5;
+        try {
+            for (SelenideElement element : $$("[action='zayavka.pl'] > .dsc > i > b")) {
+                double time = parseDouble(element.getText());
+                if (time <= tmpTime) {
+                    tmpTime = time;
+                    minTime = iterator;
+                }
+                iterator++;
+            }
+            return minTime;
+        } catch (NumberFormatException e) {
+            e.getStackTrace();
+            return -1;
+        }
+    }
+
     private static int getRandomMultiplyThousand(int from, int to) {
         return new Random().nextInt(to * 1000 - from * 1000) + from * 1000;
+    }
+
+    public static void waitAboutSomeSeconds(int seconds){
+        int minWaitTime = (int) (seconds * 1000 / 1.1);
+        int maxWaitTime = (int) (seconds * 1000 / 0.9);
+        int exactWaitTime = new Random().nextInt(maxWaitTime - minWaitTime) + minWaitTime;
+        try {
+            sleep(exactWaitTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static int getRandomInt(int from, int to) {
