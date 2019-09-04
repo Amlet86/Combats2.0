@@ -1,20 +1,20 @@
 package com.combats.be;
 
+import static com.combats.utils.MapNavigator.CURRENT_ROAD;
+import static com.combats.utils.MapNavigator.prepaireRoadFile;
 import static com.combats.utils.Properties.getTypeOfGame;
 import static com.combats.utils.Properties.isHeadless;
 import static com.combats.utils.Utils.hasGameTime;
 
-/**
- * Set System properties for configure game
- */
 public class TopLevelLogic extends BaseLevelLogic {
 
     public void game() {
         startBrowser();
         loginInGame();
         checkSuccessLoginAndWriteUserData();
+        prepaireRoadFile();
         while (hasGameTime()) {
-            battles();
+            actionsInGame();
         }
         endBrowser();
     }
@@ -23,11 +23,11 @@ public class TopLevelLogic extends BaseLevelLogic {
         new ConfigBrowser(isHeadless());
     }
 
-    private void battles() {
+    private void actionsInGame() {
         if (getTypeOfGame())
-            fightOfChaos();
+            PvP();
         else
-            fightOfDungeons();
+            PvE();
     }
 
     private void endBrowser() {

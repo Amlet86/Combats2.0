@@ -1,86 +1,71 @@
 package com.combats.pages;
 
-import com.codeborne.selenide.SelenideElement;
-import com.mashape.unirest.http.Unirest;
-import org.openqa.selenium.support.FindBy;
-
 import java.time.LocalTime;
 import java.util.List;
+
+import com.codeborne.selenide.SelenideElement;
+import com.mashape.unirest.http.Unirest;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.combats.utils.Properties.getPet;
 import static com.combats.utils.Properties.getTelegramAPI;
-import static com.combats.utils.Utils.*;
+import static com.combats.utils.Utils.getRandomInt;
+import static com.combats.utils.Utils.waitAboutSomeSeconds;
 
 public class BattlePage extends BasePage {
 
-    @FindBy(css = "[action=commit]")
-    private SelenideElement commitBtn;
-
-    @FindBy(css = ".UserBattleKick")
-    private SelenideElement battleKick;
-
-    @FindBy(css = "[action=gameover]")
-    private SelenideElement gameover;
-
-    @FindBy(css = ".userbattlekick title='Выйти'")
-    private SelenideElement buttonExit;
-
-    @FindBy(css = "button.UserBattleEnd")
-    private SelenideElement battleEnd;
-
-    @FindBy(css = ".UserBattleResources button")
-    private List<SelenideElement> anyBattleMethods;
-
-    @FindBy(css = ".UserBattleMethod")
-    private List<SelenideElement> activeBattleMethods;
-
-    @FindBy(css = ".UserBattleAttack button.UserBattleRadio")
-    private List<SelenideElement> attackRadios;
-
-    @FindBy(css = ".UserBattleDefend button.UserBattleRadio")
-    private List<SelenideElement> defendRadios;
-
-    @FindBy(css = "td.UserBattleError")
-    private SelenideElement text;
+    private SelenideElement commitBtn = $("[action=commit]");
+    private SelenideElement battleKick = $(".UserBattleKick");
+    private List<SelenideElement> anyBattleMethods = $$(".UserBattleResources button");
+    private List<SelenideElement> activeBattleMethods = $$(".UserBattleMethod");
+    private List<SelenideElement> attackRadios = $$(".UserBattleAttack button.UserBattleRadio");
+    private List<SelenideElement> defendRadios = $$(".UserBattleDefend button.UserBattleRadio");
+    private SelenideElement text = $("td.UserBattleError");
 
     public BattlePage() {
     }
 
-    public void fight() {
+    public CityPage fight() {
         switchTo().defaultContent();
         commitBtn.waitUntil(visible, 25000);
         while (commitBtn.isDisplayed() || battleKick.isDisplayed()) {
-            if (battleKick.isDisplayed()) {
-                body.pressEnter();
-            }
             if (commitBtn.isDisplayed()) {
-                if ($(".UserBattleMethod").isDisplayed()) {
-                    if (getPet())
-                        activeBattleMethods.get(0).click();
-                    else {
-                        if (anyBattleMethods.size() != 12)
-                            activeBattleMethods.get(0).click();
-                        else if (!activeBattleMethods.get(0).equals(anyBattleMethods.get(11)))
-                            activeBattleMethods.get(0).click();
-                    }
-                    waitAboutSomeSeconds(2);
-                }
-                if (attackRadios.get(1).isDisplayed())
-                    body.sendKeys(String.valueOf(getRandomInt(1, 6)));
-                if (attackRadios.size() > 6)
-                    body.sendKeys(String.valueOf(getRandomInt(1, 6)));
-                if (defendRadios.get(1).isDisplayed())
-                    defendRadios.get(getRandomInt(0, 5)).click();
-                if (commitBtn.isDisplayed()) {
-                    body.pressEnter();
-                }
+                clickBattleMethods();
+                clickAttack();
+                clickDefend();
             }
+            body.pressEnter();
             waitAboutSomeSeconds(2);
         }
         getMessage();
-        exitBattle();
+        return page(CityPage.class);
+    }
+
+    private void clickBattleMethods(){
+        if ($(".UserBattleMethod").isDisplayed()) {
+            if (getPet())
+                activeBattleMethods.get(0).click();
+            else {
+                if (anyBattleMethods.size() != 12)
+                    activeBattleMethods.get(0).click();
+                else if (!activeBattleMethods.get(0).equals(anyBattleMethods.get(11)))
+                    activeBattleMethods.get(0).click();
+            }
+            waitAboutSomeSeconds(2);
+        }
+    }
+
+    private void clickAttack(){
+        if (attackRadios.get(1).isDisplayed())
+            body.sendKeys(String.valueOf(getRandomInt(1, 6)));
+        if (attackRadios.size() > 6)
+            body.sendKeys(String.valueOf(getRandomInt(1, 6)));
+    }
+
+    private void clickDefend(){
+        if (defendRadios.get(1).isDisplayed())
+            defendRadios.get(getRandomInt(0, 5)).click();
     }
 
     private void getMessage() {
@@ -92,14 +77,6 @@ public class BattlePage extends BasePage {
                 Unirest.get("https://api.telegram.org/" + getTelegramAPI() +
                         "/sendMessage?chat_id=391800117&text=" + LocalTime.now() + " " + message);
         }
-    }
-
-    private StartPage exitBattle() {
-        if (gameover.isDisplayed())
-            gameover.click();
-        if (battleEnd.isDisplayed())
-            battleEnd.click();
-        return page(StartPage.class);
     }
 
 }

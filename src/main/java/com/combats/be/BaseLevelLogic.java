@@ -1,8 +1,8 @@
 package com.combats.be;
 
 import com.codeborne.selenide.WebDriverRunner;
+import com.combats.pages.CityPage;
 import com.combats.pages.LoginPage;
-import com.combats.pages.StartPage;
 import com.combats.utils.FileWorker;
 
 import static com.combats.utils.Properties.getUserLogin;
@@ -14,31 +14,33 @@ class BaseLevelLogic {
     void loginInGame() {
         LoginPage loginPage = new LoginPage();
         loginPage.enterToMainPage()
-                .login(getUserLogin(), getUserPassword());
+            .login(getUserLogin(), getUserPassword());
     }
 
     void checkSuccessLoginAndWriteUserData() {
         if (!WebDriverRunner.getWebDriver().getTitle().equals("Произошла ошибка"))
-            FileWorker.writeFile();
+            FileWorker.writeUserDataFile();
         else {
             waiting(3);
             quitWebDriver();
         }
     }
 
-    void fightOfChaos() {
-        StartPage startPage = new StartPage();
-        startPage.moveInTheCity()
-                .enterToChaos()
-                .fight();
+    void PvP() {
+        CityPage cityPage = new CityPage();
+        cityPage.exitFromBattle()
+            .moveInTheCity()
+            .enterToChaos()
+            .fight();
         waiting(300, 310);
     }
 
-    void fightOfDungeons() {
-        StartPage startPage = new StartPage();
-        startPage.moveInTheDungeon()
-                .inTheDungeon()
-                .fight();
+    void PvE() {
+        CityPage cityPage = new CityPage();
+        cityPage.exitFromBattle()
+            .switchToTheDungeon()
+            .walkOnTheDungeon()
+            .fight();
     }
 
     void quitWebDriver() {

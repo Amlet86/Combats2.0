@@ -18,7 +18,7 @@ import static com.combats.utils.Utils.getListMinutes;
  */
 public class LoginForm extends JFrame {
 
-    private String[] loginAndPassword = FileWorker.readFile();
+    private String[] loginAndPassword = FileWorker.readUserDataFile();
     private JTextField loginField = new JTextField(loginAndPassword[0],20);
     private JPasswordField passwordField = new JPasswordField(loginAndPassword[1],20);
 
