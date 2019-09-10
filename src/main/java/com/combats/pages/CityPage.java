@@ -15,7 +15,6 @@ public class CityPage extends BasePage {
         humanClick(gameover);
         humanClick(battleEnd);
         switchToGameFrame();
-        waitAboutSomeSeconds(10);
         return page(CityPage.class);
     }
 

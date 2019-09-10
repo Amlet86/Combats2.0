@@ -7,7 +7,6 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.combats.utils.MapNavigator.CURRENT_ROAD;
-import static com.combats.utils.MapNavigator.prepaireRoadFile;
 import static com.combats.utils.Utils.waitAboutSomeSeconds;
 
 public class DungeonsPage extends BasePage {
@@ -40,13 +39,15 @@ public class DungeonsPage extends BasePage {
     }
 
     private void moveOnTheMap() {
-        humanMoveOnTheMap("f");
         humanMoveOnTheMap("z");
         if (!CURRENT_ROAD.isEmpty()) {
             humanMoveOnTheMap(CURRENT_ROAD.get(0));
             CURRENT_ROAD.remove(0);
         } else
             humanMoveOnTheMap("w");
+        humanMoveOnTheMap("z");
+        humanMoveOnTheMap("f");
+        waitAboutSomeSeconds(2);
     }
 
 }

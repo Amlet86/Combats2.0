@@ -1,7 +1,6 @@
 package com.combats.be;
 
-import static com.combats.utils.MapNavigator.CURRENT_ROAD;
-import static com.combats.utils.MapNavigator.prepaireRoadFile;
+import static com.combats.utils.MapNavigator.prepareRoadFile;
 import static com.combats.utils.Properties.getTypeOfGame;
 import static com.combats.utils.Properties.isHeadless;
 import static com.combats.utils.Utils.hasGameTime;
@@ -12,7 +11,7 @@ public class TopLevelLogic extends BaseLevelLogic {
         startBrowser();
         loginInGame();
         checkSuccessLoginAndWriteUserData();
-        prepaireRoadFile();
+        prepareRoadFile();
         while (hasGameTime()) {
             actionsInGame();
         }

@@ -9,7 +9,8 @@ class ConfigBrowser {
 
     ConfigBrowser(boolean headlessValue) {
         if (!headlessValue) {
-            startMaximized = true;
+            browserSize = "850x700";
+//            startMaximized = true;
             holdBrowserOpen = true;
         } else {
             browserSize = "1600x900";
