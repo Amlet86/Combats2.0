@@ -34,8 +34,9 @@ class BasePage implements BaseActions {
 
     @Override
     public void humanMoveOnTheMap(CharSequence keyToMove) {
-        waitAboutSomeSeconds(2);
+        waitAboutSomeSeconds(1);
         body.sendKeys(keyToMove);
+        waitAboutSomeSeconds(1);
     }
 
 }

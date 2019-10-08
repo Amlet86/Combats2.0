@@ -20,7 +20,7 @@ class ConfigBrowser {
         reportsFolder = "fails";
         timeout = 20000;
 
-        ChromeDriverManager.chromedriver().version("75.0.3770.140");
+        ChromeDriverManager.chromedriver().version("76.0.3809.126");
         WebDriverManager.chromedriver().setup();
     }
 

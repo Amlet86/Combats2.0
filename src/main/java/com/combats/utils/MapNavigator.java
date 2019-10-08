@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class MapNavigator {
 
-    private static final String ROAD_SUN_CITY_FILE_PATH = "RoadOfSunCity.txt";
-    public static final ArrayList<String> CURRENT_ROAD = new ArrayList<>();
+    private static final String ROAD_SUN_CITY_FILE_PATH = "SunCityRoadToTheThirthLevel.txt";
+    public static final ArrayList<String> ROAD_MAP = new ArrayList<>();
 
     public static void prepareRoadFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(ROAD_SUN_CITY_FILE_PATH))) {
             while (br.ready())
-                CURRENT_ROAD.add(br.readLine());
+                ROAD_MAP.add(br.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
