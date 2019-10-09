@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class MapNavigator {
 
-    private static final String ROAD_SUN_CITY_FILE_PATH = "SunCityRoadToTheThirthLevel.txt";
+    private static final String ROAD_IN_A_DUNGEON_FILE_PATH = "DemonsCityThroughTop.txt";
     public static final ArrayList<String> ROAD_MAP = new ArrayList<>();
 
     public static void prepareRoadFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader(ROAD_SUN_CITY_FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(ROAD_IN_A_DUNGEON_FILE_PATH))) {
             while (br.ready())
                 ROAD_MAP.add(br.readLine());
         } catch (IOException e) {
