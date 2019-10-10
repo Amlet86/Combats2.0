@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MapNavigator {
 
-    private static final String ROAD_IN_A_DUNGEON_FILE_PATH = "DemonsCityThroughTop.txt";
+    private static final String ROAD_IN_A_DUNGEON_FILE_PATH = "maps/DemonsCityAllTheFirstFloor.txt";
     public static final ArrayList<String> ROAD_MAP = new ArrayList<>();
 
     public static void prepareRoadFile() {
