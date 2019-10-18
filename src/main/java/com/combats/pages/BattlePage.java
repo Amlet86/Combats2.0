@@ -36,7 +36,7 @@ public class BattlePage extends BasePage {
                 clickDefend();
             }
             body.pressEnter();
-            waitAboutSomeSeconds(2);
+            waitAboutSomeSeconds(1);
         }
         getMessage();
         return page(CityPage.class);
@@ -47,18 +47,18 @@ public class BattlePage extends BasePage {
             if (getPet())
                 activeBattleMethods.get(0).click();
             else {
-                if (anyBattleMethods.size() != 12)
+                if (anyBattleMethods.size() != 12 && activeBattleMethods.get(0).isDisplayed())
                     activeBattleMethods.get(0).click();
-                else if (!activeBattleMethods.get(0).equals(anyBattleMethods.get(11)))
+                else if (!activeBattleMethods.get(0).equals(anyBattleMethods.get(11)) && activeBattleMethods.get(0).isDisplayed())
                     activeBattleMethods.get(0).click();
             }
-            waitAboutSomeSeconds(2);
         }
+        waitAboutSomeSeconds(1);
     }
 
     private void clickAttack(){
         if (attackRadios.get(1).isDisplayed())
-            body.sendKeys(String.valueOf(getRandomInt(1, 6)));
+            attackRadios.get(getRandomInt(0, 5)).click();
         if (attackRadios.size() > 6)
             body.sendKeys(String.valueOf(getRandomInt(1, 6)));
     }

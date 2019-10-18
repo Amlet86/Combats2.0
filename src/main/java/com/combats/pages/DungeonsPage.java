@@ -12,6 +12,7 @@ import static com.combats.utils.Utils.waitAboutSomeSeconds;
 public class DungeonsPage extends BasePage {
 
     private SelenideElement map = $("div#room");
+    private SelenideElement imageOfMap = $("div#brodilka");
     private SelenideElement anyNPC = $("h3");
 
     private ArrayList<SelenideElement> dungeonCases = new ArrayList<SelenideElement>() {{
