@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar Combats-2.6.jar
