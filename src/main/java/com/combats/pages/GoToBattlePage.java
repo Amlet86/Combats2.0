@@ -9,11 +9,17 @@ import static com.combats.utils.Utils.*;
 
 public class GoToBattlePage extends BasePage {
 
-    @FindBy(css = "[value='Поединки']")
+    @FindBy(css = "td.menutop")
+    private SelenideElement menutop;
+
+    @FindBy(xpath = "//*[.='Поединки']")
     private SelenideElement battles;
 
     @FindBy(xpath = "//*[.='Хаотичные']")
     private SelenideElement chaosBattle;
+
+    @FindBy(xpath = "//*[.='Конфликты']")
+    private SelenideElement conflictsBattle;
 
     @FindBy(css = "[value='Обновить']")
     private SelenideElement refreshBtn;
@@ -29,9 +35,9 @@ public class GoToBattlePage extends BasePage {
 
     private By goCombat = By.cssSelector("[name=gocombat]");
 
-    public BattlePage enterToChaos() {
+    public BattlePage enterToPvPBattle() {
         humanClick(battles);
-        if(chaosBattle.isDisplayed()) {
+        if (chaosBattle.isDisplayed()) {
             humanClick(chaosBattle);
             while (refreshBtn.isDisplayed()) {
                 if (confirm.isDisplayed()) {
@@ -51,6 +57,9 @@ public class GoToBattlePage extends BasePage {
                     refreshBtn.click();
                 waitAboutSomeSeconds(10);
             }
+        }
+        if (conflictsBattle.isDisplayed()) {
+            humanClick(conflictsBattle);
         }
         return page(BattlePage.class);
     }

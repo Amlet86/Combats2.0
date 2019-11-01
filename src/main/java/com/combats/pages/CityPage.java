@@ -42,6 +42,10 @@ public class CityPage extends BasePage {
             waitAboutSomeSeconds(10);
             $$(FIRST_PART_OF_IMAGES_LOCATOR + "sn_club.gif']").get(3).click();
         }
+        if($(FIRST_PART_OF_IMAGES_LOCATOR + "dem_new_gates.gif").isDisplayed()){
+            waitAboutSomeSeconds(14);
+            $(FIRST_PART_OF_IMAGES_LOCATOR + "dem_new_gates.gif").click();
+        }
     }
 
     public DungeonsPage switchToTheDungeon() {

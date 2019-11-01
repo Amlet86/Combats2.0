@@ -22,7 +22,7 @@ public class LoginForm extends JFrame {
     private JTextField loginField = new JTextField(loginAndPassword[0],20);
     private JPasswordField passwordField = new JPasswordField(loginAndPassword[1],20);
 
-    private JRadioButton chaosRadio = new JRadioButton("Chaos");
+    private JRadioButton pvpRadio = new JRadioButton("PvP");
 
     private JCheckBox petCheck = new JCheckBox("Pet");
     private JCheckBox browserOffCheck = new JCheckBox("Browser off");
@@ -50,11 +50,11 @@ public class LoginForm extends JFrame {
 
         Box typeOfBattleBox = Box.createHorizontalBox();
         ButtonGroup bGroup = new ButtonGroup();
-        bGroup.add(chaosRadio);
+        bGroup.add(pvpRadio);
         JRadioButton dungeonRadio = new JRadioButton("Dungeon");
         bGroup.add(dungeonRadio);
-        typeOfBattleBox.add(chaosRadio);
-        chaosRadio.setSelected(true);
+        typeOfBattleBox.add(pvpRadio);
+        pvpRadio.setSelected(true);
         typeOfBattleBox.add(Box.createHorizontalStrut(20));
         typeOfBattleBox.add(dungeonRadio);
 
@@ -110,7 +110,7 @@ public class LoginForm extends JFrame {
             setUserLogin(loginField.getText());
             setUserPassword(String.valueOf(passwordField.getPassword()));
 
-            setTypeOfGame(chaosRadio.isSelected());
+            setTypeOfGame(pvpRadio.isSelected());
             setPet(petCheck.isSelected());
             setHeadless(browserOffCheck.isSelected());
 

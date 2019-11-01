@@ -30,7 +30,7 @@ class BaseLevelLogic {
         CityPage cityPage = new CityPage();
         cityPage.exitFromBattle()
             .moveInTheCity()
-            .enterToChaos()
+            .enterToPvPBattle()
             .fight();
         waiting(300, 310);
     }
