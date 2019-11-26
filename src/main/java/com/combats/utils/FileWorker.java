@@ -12,6 +12,10 @@ public class FileWorker {
             writer.write(Properties.getUserLogin());
             writer.append('\n');
             writer.append(Properties.getUserPassword());
+            writer.append('\n');
+            writer.append(Properties.getTelegramBotName());
+            writer.append('\n');
+            writer.append(Properties.getTelegramBotToken());
             writer.flush();
 
         } catch (IOException e) {
@@ -20,16 +24,18 @@ public class FileWorker {
     }
 
     public static String[] readUserDataFile() {
-        String[] loginAndPassword = new String[2];
+        String[] userData = new String[4];
         try (BufferedReader br = new BufferedReader(new FileReader(USER_DATA_FILE_PATH))) {
             if (br.ready()) {
-                loginAndPassword[0] = br.readLine();
-                loginAndPassword[1] = br.readLine();
+                userData[0] = br.readLine();
+                userData[1] = br.readLine();
+                userData[2] = br.readLine();
+                userData[3] = br.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return loginAndPassword;
+        return userData;
     }
 
 }

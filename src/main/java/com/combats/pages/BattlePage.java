@@ -4,12 +4,11 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.codeborne.selenide.SelenideElement;
-import com.mashape.unirest.http.Unirest;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.combats.utils.Properties.getPet;
-import static com.combats.utils.Properties.getTelegramAPI;
+import static com.combats.fe.LoginForm.bot;
+import static com.combats.utils.Properties.*;
 import static com.combats.utils.Utils.getRandomInt;
 import static com.combats.utils.Utils.waitAboutSomeSeconds;
 
@@ -42,7 +41,7 @@ public class BattlePage extends BasePage {
         return page(CityPage.class);
     }
 
-    private void clickBattleMethods(){
+    private void clickBattleMethods() {
         if ($(".UserBattleMethod").isDisplayed()) {
             if (getPet())
                 activeBattleMethods.get(0).click();
@@ -56,14 +55,14 @@ public class BattlePage extends BasePage {
         waitAboutSomeSeconds(1);
     }
 
-    private void clickAttack(){
+    private void clickAttack() {
         if (attackRadios.get(1).isDisplayed())
             attackRadios.get(getRandomInt(0, 5)).click();
         if (attackRadios.size() > 6)
             body.sendKeys(String.valueOf(getRandomInt(1, 6)));
     }
 
-    private void clickDefend(){
+    private void clickDefend() {
         if (defendRadios.get(1).isDisplayed())
             defendRadios.get(getRandomInt(0, 5)).click();
     }
@@ -71,11 +70,11 @@ public class BattlePage extends BasePage {
     private void getMessage() {
         if (text.isDisplayed()) {
             String message = text.getText();
-            if (getTelegramAPI() == null)
+            if (getTelegramBotToken() == null || getTelegramBotName() == null)
                 System.out.println(LocalTime.now() + " " + message);
-            else
-                Unirest.get("https://api.telegram.org/" + getTelegramAPI() +
-                        "/sendMessage?chat_id=391800117&text=" + LocalTime.now() + " " + message);
+            else {
+                bot.sendMsg("", message);
+            }
         }
     }
 

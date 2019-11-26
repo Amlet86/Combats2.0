@@ -10,7 +10,8 @@ public class Properties {
     private static boolean typeOfGame;
     private static boolean pet;
     private static Date endTimeOfTheGame = new Date();
-    private static String telegramAPI;
+    private static String telegramBotName;
+    private static String telegramBotToken;
 
     public static boolean isHeadless() {
         return headless;
@@ -61,12 +62,20 @@ public class Properties {
         endTimeOfTheGame.setMinutes(Integer.parseInt(minutes.toString()));
     }
 
-    public static String getTelegramAPI() {
-        return telegramAPI;
+    public static String getTelegramBotName() {
+        return telegramBotName;
     }
 
-    public static void setTelegramAPI(String telegramAPI) {
-        Properties.telegramAPI = telegramAPI;
+    public static void setTelegramBotName(String telegramBotName) {
+        Properties.telegramBotName = telegramBotName;
+    }
+
+    public static String getTelegramBotToken() {
+        return telegramBotToken;
+    }
+
+    public static void setTelegramBotToken(String telegramBotToken) {
+        Properties.telegramBotToken = telegramBotToken;
     }
 
 }

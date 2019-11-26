@@ -1,26 +1,36 @@
 package com.combats.fe;
 
 import com.combats.be.TopLevelLogic;
+import com.combats.telegram.Bot;
 import com.combats.utils.FileWorker;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+import static com.combats.telegram.PropertiesOfTelegramBot.startTelegramBot;
 import static com.combats.utils.Properties.*;
 import static com.combats.utils.Utils.getListHours;
 import static com.combats.utils.Utils.getListMinutes;
+import static javax.swing.SwingConstants.CENTER;
 
 /**
  * Create UI form for input variables and login in the game
  */
 public class LoginForm extends JFrame {
 
+    public static Bot bot;
+
     private String[] loginAndPassword = FileWorker.readUserDataFile();
-    private JTextField loginField = new JTextField(loginAndPassword[0],20);
-    private JPasswordField passwordField = new JPasswordField(loginAndPassword[1],20);
+    private JTextField loginField = new JTextField(loginAndPassword[0], 20);
+    private JPasswordField passwordField = new JPasswordField(loginAndPassword[1], 20);
+
+    private String[] telegramBotNameAndToken = FileWorker.readUserDataFile();
+    private JTextField telegramBotNameField = new JTextField(telegramBotNameAndToken[2], 30);
+    private JTextField telegramBotTokenField = new JTextField(telegramBotNameAndToken[3], 30);
 
     private JRadioButton pvpRadio = new JRadioButton("PvP");
 
@@ -32,7 +42,7 @@ public class LoginForm extends JFrame {
 
     public LoginForm() {
         super("CombatsBot");
-        setBounds(800, 500, 400, 250);
+        setBounds(800, 500, 450, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -47,6 +57,8 @@ public class LoginForm extends JFrame {
         passwordBox.add(passwordLabel);
         passwordBox.add(Box.createHorizontalStrut(6));
         passwordBox.add(passwordField);
+
+        loginLabel.setPreferredSize(passwordLabel.getPreferredSize());
 
         Box typeOfBattleBox = Box.createHorizontalBox();
         ButtonGroup bGroup = new ButtonGroup();
@@ -75,12 +87,30 @@ public class LoginForm extends JFrame {
         endTimeOfTheGameBox.add(new JLabel("minutes"));
         endTimeOfTheGameBox.add(Box.createHorizontalStrut(25));
 
-        Box startButtonBox = Box.createHorizontalBox();
-        startButtonBox.add(Box.createHorizontalGlue());
+        Box buttonsBox = Box.createHorizontalBox();
+        buttonsBox.add(Box.createHorizontalGlue());
+        JButton telegramButton = new JButton("Telegram");
+        buttonsBox.add(telegramButton);
+        buttonsBox.add(Box.createHorizontalStrut(140));
         JButton startButton = new JButton("Start");
-        startButtonBox.add(startButton);
+        buttonsBox.add(startButton);
 
-        loginLabel.setPreferredSize(passwordLabel.getPreferredSize());
+        JLabel telegramLabel = new JLabel("Telegram");
+        telegramLabel.setHorizontalAlignment(CENTER);
+
+        Box botNameBox = Box.createHorizontalBox();
+        JLabel botNameLabel = new JLabel("Name:");
+        botNameBox.add(botNameLabel);
+        botNameBox.add(Box.createHorizontalStrut(6));
+        botNameBox.add(telegramBotNameField);
+
+        Box botTokenBox = Box.createHorizontalBox();
+        JLabel botTokenLabel = new JLabel("Token:");
+        botTokenBox.add(botTokenLabel);
+        botTokenBox.add(Box.createHorizontalStrut(6));
+        botTokenBox.add(telegramBotTokenField);
+
+        botNameLabel.setPreferredSize(botTokenLabel.getPreferredSize());
 
         Box mainBox = Box.createVerticalBox();
         mainBox.setBorder(new EmptyBorder(12, 12, 12, 12));
@@ -94,17 +124,30 @@ public class LoginForm extends JFrame {
         mainBox.add(Box.createVerticalStrut(10));
         mainBox.add(endTimeOfTheGameBox);
         mainBox.add(Box.createVerticalStrut(10));
-        mainBox.add(startButtonBox);
+        mainBox.add(buttonsBox);
         setContentPane(mainBox);
         pack();
 
+        telegramButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                buttonsBox.remove(telegramButton);
+                mainBox.add(Box.createVerticalStrut(10));
+                mainBox.add(telegramLabel, BorderLayout.CENTER);
+                mainBox.add(Box.createVerticalStrut(10));
+                mainBox.add(botNameBox);
+                mainBox.add(Box.createVerticalStrut(10));
+                mainBox.add(botTokenBox);
+                pack();
+            }
+        });
+
         this.getRootPane().setDefaultButton(startButton);
 
-        startButton.addActionListener(new ButtonEventListener());
+        startButton.addActionListener(new ButtonStartListener());
         startButton.addActionListener(e -> this.dispose());
     }
 
-    class ButtonEventListener implements ActionListener {
+    class ButtonStartListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             setUserLogin(loginField.getText());
@@ -115,6 +158,11 @@ public class LoginForm extends JFrame {
             setHeadless(browserOffCheck.isSelected());
 
             setEndTimeOfTheGame(Objects.requireNonNull(endTimeHours.getSelectedItem()), Objects.requireNonNull(endTimeMinutes.getSelectedItem()));
+
+            setTelegramBotName(telegramBotNameField.getText());
+            setTelegramBotToken(telegramBotTokenField.getText());
+
+            bot = startTelegramBot();
 
             TopLevelLogic topLevelLogic = new TopLevelLogic();
             topLevelLogic.game();
