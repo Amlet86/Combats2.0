@@ -12,6 +12,7 @@ public class Properties {
     private static Date endTimeOfTheGame = new Date();
     private static String telegramBotName;
     private static String telegramBotToken;
+    private static String telegramChatId;
 
     public static boolean isHeadless() {
         return headless;
@@ -77,5 +78,14 @@ public class Properties {
     public static void setTelegramBotToken(String telegramBotToken) {
         Properties.telegramBotToken = telegramBotToken;
     }
+
+    public static String getTelegramChatId() {
+        return telegramChatId;
+    }
+
+    public static void setTelegramChatId(String telegramChatId) {
+        Properties.telegramChatId = telegramChatId;
+    }
+
 
 }

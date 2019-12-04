@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Selenide.*;
 import static com.combats.utils.Utils.waitAboutSomeSeconds;
 
-class BasePage implements BaseActions {
+public class BasePage implements BaseActions {
 
     static final String BASE_URL = "http://www.combats.com/";
     static final String FIRST_PART_OF_IMAGES_LOCATOR = "[src='http://img.combats.ru/i/images/subimages/";
@@ -19,6 +19,10 @@ class BasePage implements BaseActions {
 
     @FindBy(css = "div#ione")
     SelenideElement frameOfTheCity;
+
+    public void openBasePage() {
+        open(BASE_URL);
+    }
 
     void switchToGameFrame() {
         switchTo().frame($("[onload='top.User.Framework.MainOnLoad( )']"));

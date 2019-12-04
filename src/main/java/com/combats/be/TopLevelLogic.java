@@ -4,33 +4,44 @@ import static com.combats.utils.MapNavigator.prepareRoadFile;
 import static com.combats.utils.Properties.getTypeOfGame;
 import static com.combats.utils.Properties.isHeadless;
 import static com.combats.utils.Utils.hasGameTime;
+import static com.combats.utils.Utils.waiting;
 
 public class TopLevelLogic extends BaseLevelLogic {
 
-    public void game() {
-        startBrowser();
-        loginInGame();
-        checkSuccessLoginAndWriteUserData();
-        prepareRoadFile();
-        while (hasGameTime()) {
-            actionsInGame();
-        }
-        endBrowser();
-    }
-
-    private void startBrowser() {
+    private void configurationBrowser() {
         new ConfigBrowser(isHeadless());
     }
 
     private void actionsInGame() {
-        if (getTypeOfGame())
+        if (getTypeOfGame()) {
             PvP();
-        else
+            waiting(300, 310);
+        } else
             PvE();
     }
 
     private void endBrowser() {
         quitWebDriver();
+    }
+
+    public String game() {
+        String endGameMessage = null;
+        configurationBrowser();
+        startBrowser();
+        loginInGame();
+        checkSuccessLoginAndWriteUserData();
+        prepareRoadFile();
+        while (hasGameTime()) {
+            try {
+                actionsInGame();
+                endGameMessage = "There isn't error, the game's end because timeout.";
+            } catch (Error e) {
+                endGameMessage = e.getMessage();
+                break;
+            }
+        }
+        endBrowser();
+        return endGameMessage;
     }
 
 }

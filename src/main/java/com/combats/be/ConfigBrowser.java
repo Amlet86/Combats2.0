@@ -18,9 +18,9 @@ class ConfigBrowser {
         headless = headlessValue;
         savePageSource = false;
         reportsFolder = "fails";
-        timeout = 20000;
+        timeout = 10000;
 
-        ChromeDriverManager.chromedriver().version("76.0.3809.126");
+        ChromeDriverManager.chromedriver().version("77.0.3865.10");
         WebDriverManager.chromedriver().setup();
     }
 

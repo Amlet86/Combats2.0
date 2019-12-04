@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-import static com.combats.telegram.PropertiesOfTelegramBot.startTelegramBot;
+import static com.combats.telegram.InitializerTelegramBot.startTelegramBot;
 import static com.combats.utils.Properties.*;
 import static com.combats.utils.Utils.getListHours;
 import static com.combats.utils.Utils.getListMinutes;
@@ -163,9 +163,6 @@ public class LoginForm extends JFrame {
             setTelegramBotToken(telegramBotTokenField.getText());
 
             bot = startTelegramBot();
-
-            TopLevelLogic topLevelLogic = new TopLevelLogic();
-            topLevelLogic.game();
         }
     }
 

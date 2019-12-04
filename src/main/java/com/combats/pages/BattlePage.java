@@ -25,7 +25,7 @@ public class BattlePage extends BasePage {
     public BattlePage() {
     }
 
-    public CityPage fight() {
+    public void fight() {
         switchTo().defaultContent();
         commitBtn.waitUntil(visible, 25000);
         while (commitBtn.isDisplayed() || battleKick.isDisplayed()) {
@@ -38,7 +38,6 @@ public class BattlePage extends BasePage {
             waitAboutSomeSeconds(1);
         }
         getMessage();
-        return page(CityPage.class);
     }
 
     private void clickBattleMethods() {
@@ -68,14 +67,15 @@ public class BattlePage extends BasePage {
     }
 
     private void getMessage() {
+        String message = "";
         if (text.isDisplayed()) {
-            String message = text.getText();
+            message = text.getText();
             if (getTelegramBotToken() == null || getTelegramBotName() == null)
                 System.out.println(LocalTime.now() + " " + message);
-            else {
-                bot.sendMsg("", message);
-            }
+            else
+                bot.sendMsg(getTelegramChatId(), message);
         }
+
     }
 
 }
